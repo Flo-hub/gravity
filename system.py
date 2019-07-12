@@ -19,20 +19,21 @@ class System2d:
         self.mscale = 1e-3
         self.rscale = 1e-11
 
-        self.figure = plt.figure(figsize=(15, 15))
-        axes = plt.axes(xlim=(-2, 2), ylim=(-2, 2))
-        axes.autoscale(False)
+        self.figure = plt.figure(figsize=(15, 15))  # Grösse Anzeige & Leerer Rahmen
+        axes = plt.axes(xlim=(-2, 2), ylim=(-2, 2))  # Skalierung Rahmen
+        axes.autoscale(False)  # ich will eine fixe Skalierung
+        
 
         for part in particles:
-            part.line = axes.plot([], [], "o")[0]
+            part.line = axes.plot([], [], "o")[0]  # EINE leere Linie zum Plotten der Partikel, wird nur einen Punkt enthalten
 
 
-    def init_anmiation(self):
+    def init_anmiation(self): 
         l = []
-        for part in self.particles:
-            part.line.set_data([], [])
-            l.append(part.line)
-        return l
+        for part in self.particles:  # für jede Partikel...
+            part.line.set_data([], [])  # werde den Partikelpunkt auf der Linie wegwischen sozusagen
+            l.append(part.line)  # und füge die nun leere Linie der Liste l hinzu
+        return l  # und mein return ist die Liste von leeren Linien, also konkret das Wegwischen des Bildes
 
     def animate(self, step):
         self.step()
@@ -41,7 +42,7 @@ class System2d:
             part.line.set_data(*(part.pos * self.rscale))
             part.line.set_markersize(np.cbrt(np.sqrt(part.mass)) * self.mscale)
             l.append(part.line)
-        return l
+        return l  # 
 
     def reset(self):
         self.elapsed = 0
@@ -61,8 +62,6 @@ class System2d:
                 a += self.G * j.mass / le * r / np.sqrt(le)
 
             part.velocity += a * self.dt
-
-        print(self.particles[1])
 
         self.elapsed += self.dt
 
