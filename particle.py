@@ -2,12 +2,13 @@
 import numpy as np
 
 class Particle:
-    def __init__(self, r, v, m):
+    def __init__(self, r, v, m,ra):
         self.pos = np.array(r, dtype=np.double)
         self.velocity = np.array(v, dtype=np.double)
         self.mass = m
+        self.radius = ra
 
-        self.line = None  # animation
+        self.line = None  # die "Spur" der Partikel, wird zwischen jeder Frame weggewischt und besteht in jeder Frame nur aus einem Punkt
 
         self.__orig_pos = self.pos
         self.__orig_velocity = self.velocity
