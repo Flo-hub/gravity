@@ -44,6 +44,7 @@ class System2d:
             l.append(part.line)
         return l  
 
+
     def reset(self):
         self.elapsed = 0
         for p in self.particles:
@@ -72,6 +73,7 @@ class System2d:
         for part in self.particles:
             if part.mass == 0: 
                 self.particles.remove(part)  # verschwundene Körper verschwinden nun auch aus der Liste
+
 
     def render(self):
         for part in self.particles:
