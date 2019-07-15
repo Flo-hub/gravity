@@ -22,7 +22,7 @@ def main():
     #     # print(np.linalg.norm(system.particles[0].pos - system.particles[1].pos))
     # system.render()
 
-    system.start(365)
+    system.start(3)  # lassen das System 3 Erdjehre laufen
 
 
 
