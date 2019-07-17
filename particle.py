@@ -217,5 +217,136 @@ class Tree:
         #print str(point.path)
         
         
+      import numpy as np
+
+class Point:
+    
+    def __init__(self, position, value = 0, heith = 0):
+        self.val = value  # in {-1,1}
+        self.pos = np.array(position, dtype=np.double)  # im d-dimensionalen Raum
+        self.h = heith  # Hôhe im Baum nachdem Einbauen
         
+        self.path = []  # Liste von 1er und 2er, repräsentiert den Weg
+        
+        self.left = None  # habe ich einen linken
+        self.right = None  # bzw. rechten Zweig?
+        self.node = None # oder die letzte Kreuzung
+    
+    def starts_climbing(self,p):
+        
+        d = len(self.pos)  # praktischer
+        self.h += 1  # auf jeden Fall bin ich im Baum um 1 Stockwerk höher
+        self.node = p
+        if self.pos[p.h % d] < p.pos[p.h % d]:  # falls die i-te Komponente kleiner ist als die von p:
+            self.path.append(1)  # fûge ich meinem Weg einen links turn hinzu            
+            if p.left != None:   # und entweder mache ich beim nâchsten Knoten weiter...
+                self.starts_climbing(p.left)  #...indem ich rekursiv das selbe tue
+            else:   # oder es gibt keinen nächsten Knoten 
+                p.left = self  # und ich bleibe stehen
+                
+        else:  # falls die i-te Komponente grösser ist agiere ich analog, diesmal für 
+            self.path.append(2)  # rechts
+            if p.right != None: 
+                self.starts_climbing(p.right)
+            else: 
+                p.right = self
+          
+    def distance_to(self,p):
+        r = self.pos - p.pos
+        print(str(p.pos))
+        return np.sqrt(np.sum(r ** 2 ))
+    
+    def distance_to_proj(self,p):
+        d = len(self.pos)
+        r = self.pos - p.pos
+        return np.sqrt(np.sum())
+        
+            
+           
+                
+            
+            
+            
+        
+        
+class Tree:
+    
+    def __init__(self,dimension):
+        self.d = dimension
+        self.out = False
+        self.points = []
+        
+    def grows(self,point):
+        
+        #assert len(point.pos) == self.d
+        
+        if self.out:
+            point.starts_climbing(self.points[0])
+        else: 
+            self.out = True
+            
+        self.points.append(point)
+        
+        print(str(point.path))
+        
+    def node_distances(self,point,p,distances):
+        
+        if p.node != None:
+            distances.append(point.distance_to(p.node))
+            self.node_distances(point,p.node,distances)
+        
+        return distances
+                  
+        
+    def closest_of(self,point):
+        
+        self.grows(point)
+        print('')
+        for p in self.points:
+            print(str(p.path))
+        
+        print('')
+        
+        dist = sorted(self.node_distances(point,point,[]))  # step 1
+        print('')
+        print(str(dist))
+       
+        champ = dist[0]
+        
+        
+        
+        self.points.remove(point)
+        print('')
+        for p in self.points:
+            print(str(p.path))
+        
+        
+        return dist[0]
+        
+      
+        
+    
+
+
+
+
+
+
+tree = Tree(2)
+
+tree.grows(Point([3,3]))
+tree.grows(Point([4,2]))
+tree.grows(Point([5,3]))
+tree.grows(Point([5,1]))
+tree.grows(Point([3,1]))
+tree.grows(Point([1,2]))
+tree.grows(Point([1,1]))
+tree.grows(Point([2,3]))
+
+print(tree.closest_of(Point([4,3/2])))
+
+print('')
+print()
+
+  
     
