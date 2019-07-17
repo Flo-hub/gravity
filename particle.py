@@ -163,3 +163,56 @@ def kdtree_closest_point(root, point, depth=0):
 
 class Point:
     
+    def __init_(value, position, heith = 0):
+        self.val = value
+        self.pos = position
+        self.h = heith
+        
+        self.path = None 
+        
+        self.left = None
+        self.right = None
+    
+    starts_climbing(p):
+        
+        d = len(self.pos)
+        self.h += 1
+        
+        if self.pos[p.h % d] < p.pos[p.h % d]:  # falls die i-te Komponente kleiner ist als die von p:
+            if p.left != None: 
+                self.starts_climbing(p.left)
+            else: 
+                p.left = self
+                
+                
+        else:
+            if p.right != None: 
+                self.starts_climbing(p.right)
+            else: 
+                p.right = self
+          
+        
+            
+        
+        
+class Tree:
+    
+    def __init_(dimension):
+        self.d = dimension
+        self.out = False
+        self.points = []
+        
+    def grows(point):
+        
+        assert len(point.pos) == d
+        
+        if self.out:
+            point.starts_climbing(points[0])
+        else: 
+            self.out = true
+            
+        self.points.append(point)
+        
+        
+        
+    
