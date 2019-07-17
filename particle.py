@@ -164,28 +164,29 @@ def kdtree_closest_point(root, point, depth=0):
 class Point:
     
     def __init_(value, position, heith = 0):
-        self.val = value
-        self.pos = position
-        self.h = heith
+        self.val = value  # in {-1,1}
+        self.pos = position  # im d-dimensionalen Raum
+        self.h = heith  # Hôhe im Baum nachdem Einbauen
         
-        self.path = None 
+        self.path = []  # Liste von 1er und 2er, repräsentiert den Weg
         
-        self.left = None
-        self.right = None
+        self.left = None  # habe ich einen linken
+        self.right = None  # bzw. rechten Zweig?
     
-    starts_climbing(p):
+    def starts_climbing(p):
         
-        d = len(self.pos)
-        self.h += 1
+        d = len(self.pos)  # praktischer
+        self.h += 1  # auf jeden Fall bin ich im Baum um 1 Stockwerk höher
         
         if self.pos[p.h % d] < p.pos[p.h % d]:  # falls die i-te Komponente kleiner ist als die von p:
-            if p.left != None: 
-                self.starts_climbing(p.left)
-            else: 
-                p.left = self
+            self.path.append(1)  # fûge ich meinem Weg einen links turn hinzu
+            if p.left != None:   # und entweder mache ich beim nâchsten Knoten weiter...
+                self.starts_climbing(p.left)  #...indem ich rekursiv das selbe tue
+            else:   # oder es gibt keinen nächsten Knoten 
+                p.left = self  # und ich bleibe stehen
                 
-                
-        else:
+        else:  # falls die i-te Komponente grösser ist agiere ich analog, diesmal für 
+            self.path.append(2)  # rechts
             if p.right != None: 
                 self.starts_climbing(p.right)
             else: 
@@ -212,6 +213,8 @@ class Tree:
             self.out = true
             
         self.points.append(point)
+        
+        #print str(point.path)
         
         
         
