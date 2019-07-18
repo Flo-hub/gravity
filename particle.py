@@ -307,7 +307,30 @@ class Tree:
         
     def closest_of(self,point,k):
         
+        
         self.grows(point)
+        
+        neighbours = sorted(point.ancestors([]), key = point.distance_to())
+        
+        if len(neighbours) > k:
+            for i in range(len(neighbours)-k):
+                neighbours.remove(neighbours[k-1+i])
+         
+        for p in neighbours:
+            if point.distance_to_proj(p) < point.distance_to(neighbours[k-1]):
+                for q in self.points:
+                    if len(q.path) > p.h + 1 and q.path[p.h + 1] = (point.path[p.h + 1] + 1) % 2 :
+                            if point.distance_to(q) < point.distance_to(neighbours[k-1] and len(neighbours) = k:
+                                neighbours = sorted(neighbours.append(q))
+                                neighbours.remove(neighbours[k])
+                            elif  len(neighbours) < k:
+                                neighbours.append(q)
+                        
+                                      
+        return ancestors
+        
+    
+
         print('')
         for p in self.points:
             print(str(p.path))
@@ -326,31 +349,7 @@ class Tree:
         self.points.remove(point)
         print('')
         for p in self.points:
-            print(str(p.path))
-        
-        
-        neighbours = sorted(point.ancestors([]), key = point.distance_to())
-        
-        if len(neighbours) > k:
-            for i in range(len(neighbours)-k):
-                neighbours.append(neighbours[k-1+i])
-         
-        for p in neighbours:
-            if point.distance_to_proj(p) < point.distance_to(neighbours[k-1]):
-                if point.path[p.h+1] = 1:
-                    for q in self.points:
-                        if q.path[p.h+1] = 2:
-                            if point.distance_to(p) < neighbours
-                            
-                            
-                       
-                        
-                    
-
-        return ancestors
-        
-    
-        
+            print(str(p.path))        
     
 
 
