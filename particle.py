@@ -258,9 +258,16 @@ class Point:
     
     def distance_to_proj(self,p):
         d = len(self.pos)
-        r = self.pos - p.pos
-        return np.sqrt(np.sum())
+        r = self.pos[p.h/ % d]-p.pos[p.h/ % d]
+        return np.absolute([r])
         
+    def ancestors(self,list):
+        if self.node != None:
+            list.append(self.node)
+            self.node.ancestors(list)
+        return list
+    
+    
             
            
                 
@@ -298,7 +305,7 @@ class Tree:
         return distances
                   
         
-    def closest_of(self,point):
+    def closest_of(self,point,k):
         
         self.grows(point)
         print('')
@@ -308,12 +315,13 @@ class Tree:
         print('')
         
         dist = sorted(self.node_distances(point,point,[]))  # step 1
-        print('')
-        print(str(dist))
+        #print(str(dist))
        
-        champ = dist[0]
         
+            
         
+        else:
+            return dist
         
         self.points.remove(point)
         print('')
@@ -321,9 +329,27 @@ class Tree:
             print(str(p.path))
         
         
-        return dist[0]
+        neighbours = sorted(point.ancestors([]), key = point.distance_to())
         
-      
+        if len(neighbours) > k:
+            for i in range(len(neighbours)-k):
+                neighbours.append(neighbours[k-1+i])
+         
+        for p in neighbours:
+            if point.distance_to_proj(p) < point.distance_to(neighbours[k-1]):
+                if point.path[p.h+1] = 1:
+                    for q in self.points:
+                        if q.path[p.h+1] = 2:
+                            if point.distance_to(p) < neighbours
+                            
+                            
+                       
+                        
+                    
+
+        return ancestors
+        
+    
         
     
 
