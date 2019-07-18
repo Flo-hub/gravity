@@ -326,8 +326,8 @@ class Tree:
                             elif  len(neighbours) < k:
                                 neighbours.append(q)
                         
-                                      
-        return ancestors
+        self.points.remove(point)                             
+        return neighbours
         
     
 
@@ -346,7 +346,7 @@ class Tree:
         else:
             return dist
         
-        self.points.remove(point)
+        
         print('')
         for p in self.points:
             print(str(p.path))        
