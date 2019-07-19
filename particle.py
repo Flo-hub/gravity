@@ -8,64 +8,6 @@ import pprint
 
 class Point:
     
-    def __init_(value, position, heith = 0):
-        self.val = value  # in {-1,1}
-        self.pos = position  # im d-dimensionalen Raum
-        self.h = heith  # Hôhe im Baum nachdem Einbauen
-        
-        self.path = []  # Liste von 1er und 2er, repräsentiert den Weg
-        
-        self.left = None  # habe ich einen linken
-        self.right = None  # bzw. rechten Zweig?
-    
-    def starts_climbing(p):
-        
-        d = len(self.pos)  # praktischer
-        self.h += 1  # auf jeden Fall bin ich im Baum um 1 Stockwerk höher
-        
-        if self.pos[p.h % d] < p.pos[p.h % d]:  # falls die i-te Komponente kleiner ist als die von p:
-            self.path.append(1)  # fûge ich meinem Weg einen links turn hinzu
-            if p.left != None:   # und entweder mache ich beim nâchsten Knoten weiter...
-                self.starts_climbing(p.left)  #...indem ich rekursiv das selbe tue
-            else:   # oder es gibt keinen nächsten Knoten 
-                p.left = self  # und ich bleibe stehen
-                
-        else:  # falls die i-te Komponente grösser ist agiere ich analog, diesmal für 
-            self.path.append(2)  # rechts
-            if p.right != None: 
-                self.starts_climbing(p.right)
-            else: 
-                p.right = self
-          
-        
-            
-        
-        
-class Tree:
-    
-    def __init_(dimension):
-        self.d = dimension
-        self.out = False
-        self.points = []
-        
-    def grows(point):
-        
-        assert len(point.pos) == d
-        
-        if self.out:
-            point.starts_climbing(points[0])
-        else: 
-            self.out = true
-            
-        self.points.append(point)
-        
-        #print str(point.path)
-        
-        
-      import numpy as np
-
-class Point:
-    
     def __init__(self, position, value = 0, heith = 0):
         self.val = value  # in {-1,1}
         self.pos = np.array(position, dtype=np.double)  # im d-dimensionalen Raum
@@ -220,23 +162,51 @@ print()
 
   
  #Wir brauchen:
- l                                                                       
- l1 = 
- l2 =                                                                     
- data_set = 
- 
-                                                                        
- for r in range(l-1):
-                                                                            
-     
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
+d
+l                                                                       
+l1 = 
+l2 =                                                                     
+data_set = 
+trees = []
+values = []     
+sign()  
+best = 1                                                                        
+K =     
+
+for k in KSET:
+    Error = 0                                                                       
+    for r in range(l-1):
+        R = 0                                                                  
+        trees.append(Tree(d))                                                                        
+        for v in data_set[:r*l1]:
+            trees[r].grows(Point(v[1:],v[0]))                                                              
+        for v in data_set[(r+1)*l1:]:
+            trees[r].grows(Point(v[1:],v[0]))
+        for w in data_set[r*l1:(r+1)*l1]:
+            value = 0
+            for p in trees[r].closest_of(Point(w[1:],w[0]),k):
+                value += p.value
+            if sign(value) != w[0]:
+                R += 1                                                                
+            values.append(sign(value))   
+        R /= l1  
+        Error += R                                                                    
+    R = 0                                                                        
+    trees.append(Tree(d))                                                                        
+        for v in data_set[:(l-1)*l1]:
+            trees[r].grows(Point(v[1:],v[0]))                                                            
+        for w in data_set[(l-1)*l1:]:
+            value = 0
+            for p in trees[r].closest_of(Point(w[1:],w[0]),k):
+                value += p.value
+             if sign(value) != w[0]:
+                R += 1                                                               
+            values.append(sign(value))                                                                                                                                          
+    R /= l2                                                                       
+    Error =+ R                                                                                                                                               
+    Error /= l                                                                  
+    if Error < best:
+        K = k                                                                    
                                                                         
                                                                         
                                                                         
