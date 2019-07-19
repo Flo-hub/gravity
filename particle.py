@@ -1,6 +1,7 @@
 import math
-import xml.etree.ElementTree as ET
-import pprint
+import numpy as np
+#import xml.etree.ElementTree as ET
+#import pprint
 #import numpy as np
 #from numpy.linalg import inv, norm
 
@@ -80,7 +81,7 @@ class Tree:
             
         self.points.append(point)
         
-        print(str(point.path))
+        #print(str(point.path))
         
     def node_distances(self,point,p,distances):
         
@@ -94,15 +95,15 @@ class Tree:
     def neighbors_of(self,point,k):
 
         self.grows(point)
-        print('')
-        print('')
+        #print('')
+        #print('')
         neighbors = sorted( point.ancestors([]), key = point.distance_to )
         for p in neighbors:
             print( str(p.pos) + ': ' + str(point.distance_to(p)) )
-        print('')
+        #print('')
 
         #print(str(neighbors))
-        print('')
+        #print('')
 
         if len(neighbors) > k:
             for i in range(len(neighbors) - k):
@@ -127,10 +128,10 @@ class Tree:
                             neighbors.append(q)
             for p in neighbors:
                 print( str(p.pos) + ': ' + str(point.distance_to(p)) )
-            print('')
+           # print('')
 
         self.points.remove(point)
-        print('Die ' + str(k) + ' nächsten Nachbarn sind:')
+        #print('Die ' + str(k) + ' nächsten Nachbarn sind:')
         
         return neighbors
         
@@ -196,7 +197,7 @@ def classify(name, l = 5):
         trees[l-1].grows(Point(v[1:],v[0]))  
     
     
-    values = []     
+    #values = []     
     best = 1                                                                        
     K = None
 
@@ -210,7 +211,7 @@ def classify(name, l = 5):
                     value += p.value
                 if sign(value) != w[0]:
                     R += 1                                                                
-                values.append(sign(value))   
+                #values.append(sign(value))   
             R /= l1  
             Error += R                                                                    
         R = 0                                                                        
@@ -220,7 +221,7 @@ def classify(name, l = 5):
                 value += p.value
                 if sign(value) != w[0]:
                     R += 1                                                               
-                values.append(sign(value))                                                                                                                                          
+            #values.append(sign(value))                                                                                                                                          
         R /= l2                                                                       
         Error += R                                                                                                                                               
         Error /= l                                                                  
@@ -230,7 +231,6 @@ def classify(name, l = 5):
                                                                         
     test_set =  np.genfromtxt("{}.test.csv".format(name) , delimiter=',')     
                                                                 
-    classifications = []
     R = 0                                                                    
     for v in test_set:                                                                    
         classification = 0                                                                    
@@ -243,8 +243,10 @@ def classify(name, l = 5):
         classification = sign(classification)
         if classification != v[0]:
             R += 1
-        classifications.append(sign(classification))  
+        v[0] = classification
     R /= len(test_set) 
+    
+    np.savetxt('{}.result.csv'.format(name), test_set, delimiter=',', fmt='%1.4f')
     
     t2 = process_time()
     print('Best number of neighbors: {}'.format(K))
@@ -254,9 +256,20 @@ def classify(name, l = 5):
                                                                         
                                                                         
    #Just_do_it.py
-from Classify import classify
+#from Classify import classify
 
-classify('bananas1-2d')                                                                     
+classify('bananas1-2d‘)
+classify('bananas1-4d‘)
+classify('bananas2-2d‘)
+classify('bananas2-4d‘)
+classify('bananas5-2d‘)
+classify('bananas5-4d‘)
+classify('crosses-2d‘)
+classify('toy-2d‘)
+classify('toy-3d‘)
+classify('toy-4d‘)
+classify('toy-10d‘)
+                                                                   
                                                                         
                                                                         
                                                                         
