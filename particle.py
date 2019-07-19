@@ -166,7 +166,7 @@ d
 l                                                                       
 l1 = 
 l2 =                                                                     
-data_set = 
+train_set = 
 trees = []
 values = []     
 sign()  
@@ -207,6 +207,26 @@ for k in KSET:
     Error /= l                                                                  
     if Error < best:
         K = k                                                                    
+                                                                                                                                                
+                                                                        
+test_set =                                                                         
+classifications = []
+                                                                        
+for v in test_set:                                                                    
+    classification = 0                                                                    
+    for r in range(l):
+        value = 0                                                                
+        for p in trees[r].closest_of(Point(v[1:],v[0])):                                                                
+            value += p.value   
+        value = sign(value)  
+        classification += value                                                                
+    classifications.append(sign(classification))                                                               
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
                                                                         
                                                                         
                                                                         
