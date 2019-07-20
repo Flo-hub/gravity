@@ -7,7 +7,12 @@ import numpy as np
 
 ## Fürs Code-Schreiben: limitiere Länge der Datensätze zu:
 
-
+def sign(zahl):
+    ''' Gibt das Vorzeichen der Eingabezahl aus. '''
+    if zahl >= 0:
+        return 1
+    else:
+        return -1
 
 class Point:
     
